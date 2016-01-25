@@ -1,2 +1,2 @@
-# Inventory of Map of Life datassets
+# Inventory of Map of Life datasets
 
