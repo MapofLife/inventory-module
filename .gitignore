@@ -1,0 +1,19 @@
+# Virtualenv files
+env/
+.idea/
+
+# Installed libraries
+lib/
+node_modules/
+bower_components/
+
+# Python compiled
+*.pyc
+
+# API keys
+server/cartodb_apikey.py
+server/gcs_apikey.py
+
+# Management scripts
+launch.sh
+deploy.sh
