@@ -1,9 +1,9 @@
 {
-  "name": "ng-mol",
+  "name": "inventory-module",
   "private": true,
-  "version": "0.0.0",
-  "description": "Map of Life front-end in Angular",
-  "repository": "https://github.com/MapofLife/ng-mol",
+  "version": "0.0.1",
+  "description": "Map of Life Dataset Inventory",
+  "repository": "https://github.com/MapofLife/inventory-module",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",
