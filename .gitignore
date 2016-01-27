@@ -6,6 +6,7 @@ env/
 lib/
 node_modules/
 bower_components/
+!client/js/lib/
 
 # Python compiled
 *.pyc
