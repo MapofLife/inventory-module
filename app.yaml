@@ -1,0 +1,53 @@
+application: map-of-life
+module: inventory
+version: dev
+runtime: python27
+threadsafe: true
+api_version: 1
+skip_files:
+- ^(node_modules/.*)
+- ^(client/components/mol/?.*/node_modules/.*)
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.md$
+- ^(.*/)?.*\.yml$
+- ^(.*/)?.*\.map$
+- ^(.*/)?.*\.less$
+- ^(.*/)?.*\.sass$
+- ^(.*/)?.*\.gzip$
+- ^(.*/)?.*\.rb$
+- ^(.*/)?.*\.scss$
+- ^(.*/)?.*\LICENSE$
+- ^(.*/)?.*\.coffee$
+- ^(.*/)?.*\.DS_Store$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+
+inbound_services:
+- warmup
+
+builtins:
+- remote_api: on
+
+
+handlers:
+
+- url: /inventory/assets/
+  static_dir: client
+
+- url: /.*
+  script: server.app
+
+
+libraries:
+- name: pycrypto
+  version: "2.3"
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.15"
+- name: numpy
+  version: "latest"
+- name: matplotlib
+  version: latest
