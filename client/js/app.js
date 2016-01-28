@@ -24,13 +24,14 @@ var inventoryApp = angular.module('mol', [
   //'ui.checkbox',
   //'imageHelpers',
   //'ui-leaflet',
-  'angularResizable',
-  'ui-rangeSlider',
-  'angular-loading-bar',
+  //'angularResizable',
+  //'ui-rangeSlider',
+  //'angular-loading-bar',
   //'percentage',
   //'km2',
   //'ngSanitize',
-  'ngCookies'
+  //'ngCookies',
+  'mol.inventory-controllers'
 ]);
 
 inventoryApp.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
