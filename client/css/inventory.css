@@ -1,0 +1,13 @@
+.full-height-thin {
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: 80px;
+}
+
+.inventory-table {
+  background-color: lightgray;
+}
+
+.inventory-map {
+  background-color: lightblue;
+}
