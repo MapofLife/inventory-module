@@ -33,21 +33,33 @@ builtins:
 
 handlers:
 
+# MOL REST APIs
+
 - url: /inventory/assets/
   static_dir: client
 
-- url: /.*
-  script: server.app
+
+# Boots the angular application
+
+- url: /inventory/.*
+  script: server.handlers.base_handler.application
+
+- url: /inventory
+  script: server.handlers.base_handler.application
 
 
 libraries:
 - name: pycrypto
   version: "2.3"
+
 - name: jinja2
   version: "2.6"
+
 - name: markupsafe
   version: "0.15"
+
 - name: numpy
   version: "latest"
+
 - name: matplotlib
   version: latest

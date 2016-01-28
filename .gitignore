@@ -1,20 +1,12 @@
-# Virtualenv files
-env/
-.idea/
-
-# Installed libraries
-lib/
+#logs/*
+!.gitkeep
 node_modules/
-bower_components/
-!client/js/lib/
-
-# Python compiled
+client/components/*
+!client/components/.gitkeep
+tmp
+.DS_Store
 *.pyc
-
-# API keys
-server/cartodb_apikey.py
-server/gcs_apikey.py
-
-# Management scripts
-launch.sh
-deploy.sh
+.idea
+config.py
+privatekey.pem
+config_creds.py
