@@ -5,10 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Map of Life - Dataset Inventory</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
+  <link href="//mol.org/static/css/mol-basic.css" rel="stylesheet"/>
 </head>
 <body>
   <div lass="mol-view-container" ui-view></div>
-  <link href="//mol.org/static/css/mol-basic.css" rel="stylesheet"/>
   <script src="//mol.org/static/js/jquery.min.js"></script>
   <script src="//mol.org/static/js/bootstrap.min.js"></script>
   {% if prod and not debug %}
@@ -39,14 +40,17 @@
     <script src="/client/components/angular-rangeslider/angular.rangeSlider.js"></script>
     <script src="/client/components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="/client/components/lodash/lodash.js"></script>
+    <script src="/client/components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="/client/components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
+    <script src="/client/components/ng-pageslide/dist/angular-pageslide-directive.js"></script>
     <script src="/client/components/leaflet/dist/leaflet.js"></script>
     <script src="/client/components/Leaflet.utfgrid/dist/leaflet.utfgrid.js"></script>
     <script src="/client/components/leaflet.loading/src/Control.Loading.js"></script>
     <script src="/client/components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
+    <script src="/client/components/Leaflet.draw/dist/leaflet.draw.js"></script>
+    <script src="/client/components/leaflet-sidebar/src/L.Control.Sidebar.js"></script>
     <script src="/client/components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-    <script src="/client/components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-    <script src="/client/components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
-    <script src="/client/components/ng-pageslide/dist/angular-pageslide-directive.js"></script>
+    <script src="/client/components/ui-leaflet/dist/ui-leaflet.js"></script>
 
     <script src="/client/views/inventory/controller.js"></script>
     <script src="/client/js/app.js"></script>

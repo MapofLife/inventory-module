@@ -5,6 +5,7 @@ module.controller('inventoryCtrl', ['$scope', function($scope) {
   $scope.molAssetsUrl = 'http://localhost:8081';
 
   $scope.map = {
+    /*
     center: { lat: 0, lng: 0, zoom: 8 },
     layers: {
         baselayers: {
@@ -22,6 +23,7 @@ module.controller('inventoryCtrl', ['$scope', function($scope) {
         },
         overlays: {}
     },
+    */
     defaults: {
       //scrollWheelZoom: false
     }
