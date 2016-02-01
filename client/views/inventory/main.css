@@ -1,5 +1,9 @@
+.mol-inventory {
+  padding-top: 0.25em;
+}
+
 .inventory-table {
-  background-color: lightgray;
+  /*background-color: lightgray;*/
 }
 
 .inventory-map {

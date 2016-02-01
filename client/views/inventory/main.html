@@ -1,8 +1,54 @@
 <div ng-include="'//mol.org/partials/header-thin' | trustUrl"></div>
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
-<div class="container-fluid">
+<div class="mol-inventory container-fluid">
   <div class="row">
-    <div class="col-md-4 inventory-table"><h1>Table</h1></div>
+    <div class="col-md-4 inventory-table">
+      <div class="form-group">
+        <label for="provider.selected" class="control-label">Provider</label>
+        <ui-select ng-model="option.provider">
+        <ui-select-match allow-clear="true" placeholder="Select Dataset Provider">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="provider in (providers | filter: $select.search) track by provider.id">
+            <span ng-bind-html="provider.name | highlight: $select.search"></span>
+        </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label for="type" class="control-label">Type</label>
+        <ui-select ng-model="option.type">
+        <ui-select-match allow-clear="true" placeholder="Select Dataset Type">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="type in (types | filter: $select.search) track by type.id">
+            <span ng-bind-html="type.name | highlight: $select.search"></span>
+        </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label for="taxonomicGroup" class="control-label">Taxonomic Group</label>
+        <ui-select ng-model="option.taxonomicGroup">
+        <ui-select-match allow-clear="true" placeholder="Select Taxonomic Group">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="taxon in (taxa | filter: $select.search) track by taxon.id">
+            <span ng-bind-html="taxon.name | highlight: $select.search"></span>
+        </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label for="region" class="control-label">Region</label>
+        <ui-select ng-model="option.region">
+        <ui-select-match allow-clear="true" placeholder="Select Region">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="region in (regions | filter: $select.search) track by region.id">
+            <span ng-bind-html="region.name | highlight: $select.search"></span>
+        </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label for="temporalScope" class="control-label">Temporal Scope</label>
+        <ui-select ng-model="option.temporalScope">
+        <ui-select-match allow-clear="true" placeholder="Select Temporal Scope">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="temporalScope in (temporalScopes | filter: $select.search) track by temporalScope.id">
+            <span ng-bind-html="temporalScope.name | highlight: $select.search"></span>
+        </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
     <div class="col-md-8 inventory-map">
       <leaflet width="100%" height="480px"
         center="map.center"/>
