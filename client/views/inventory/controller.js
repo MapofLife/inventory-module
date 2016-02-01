@@ -1,12 +1,9 @@
 var module = angular.module('mol.inventory-controllers', []);
 
 module.controller('inventoryCtrl', ['$scope', function($scope) {
-  //TODO: This needs to be changed based upon the root URL
-  $scope.molAssetsUrl = 'http://localhost:8081';
-
   $scope.map = {
+    center: { lat: 0, lng: 0, zoom: 4 },
     /*
-    center: { lat: 0, lng: 0, zoom: 8 },
     layers: {
         baselayers: {
             positron: {

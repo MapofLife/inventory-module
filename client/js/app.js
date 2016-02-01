@@ -45,8 +45,15 @@ inventoryApp.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider
   ]);
   $urlRouterProvider.otherwise("/inventory/");
   $stateProvider.state('inventory', {
-        templateUrl: '/client/views/inventory/main.html',
+        templateUrl: '/inventory/assets/views/inventory/main.html',
         controller: 'inventoryCtrl',
         url: '/inventory/',
   });
+
 }]);
+
+inventoryApp.filter('trustUrl', function ($sce) {
+  return function(url) {
+    return $sce.trustAsResourceUrl(url);
+  };
+});
