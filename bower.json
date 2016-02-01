@@ -19,7 +19,7 @@
     "Leaflet.utfgrid": "danzel/Leaflet.utfgrid",
     "ng-pageslide": "~0.1.8",
     "sortable": "~0.6.0",
-    "ui-bootstrap": "~0.13.0",
+    "ui-bootstrap": "~1.1.1",
     "angular-bootstrap": "~0.14.3",
     "angular-ui-router": "~0.2.15",
     "jquery": "~2.1.4",

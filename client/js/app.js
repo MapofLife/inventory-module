@@ -16,21 +16,20 @@ var inventoryApp = angular.module('mol', [
   //'mol.consensus-map',
   //'mol.region-selector',
   //'mol.region-model-ctrl',
-  'nemLogging',
-  'ui.bootstrap',
   'ui.select',
   'ui.router',
   //'ui.checkbox',
   //'imageHelpers',
-  'ui-leaflet',
-  //'leaflet-directive',
+  'leaflet-directive',
   //'angularResizable',
+  //'nvd3',
   //'ui-rangeSlider',
   //'angular-loading-bar',
+  //'pageslide-directive',
   //'percentage',
   //'km2',
-  //'ngSanitize',
-  //'ngCookies',
+  'ngSanitize',
+  'ngCookies',
   'mol.inventory-controllers'
 ]);
 
@@ -45,7 +44,7 @@ inventoryApp.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider
   ]);
   $urlRouterProvider.otherwise("/inventory/");
   $stateProvider.state('inventory', {
-        templateUrl: '/inventory/assets/views/inventory/main.html',
+        templateUrl: '/client/views/inventory/main.html',
         controller: 'inventoryCtrl',
         url: '/inventory/',
   });
