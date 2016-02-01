@@ -1,7 +1,72 @@
 .inventory-table {
-  /*background-color: lightgray;*/
+  background-color: lightgray;
 }
 
 .inventory-map {
-  /*background-color: lightblue;*/
+  position: relative;
+  display: flex;
+  flex: 1 1;
+  background-color: lightblue;
+}
+
+.inventory-map .angular-leaflet-map {
+  position: relative;
+  flex: 1;
+}
+
+.mol-view-container {
+  position: absolute;
+  top: 0; left:0; right:0; bottom: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.inventory-container {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.inventory-container .angular-leaflet-map {
+  flex: 1;
+}
+
+.inventory-container .mol-inventory-map {
+  display: flex;
+  flex: 1 1;
+}
+
+.inventory-container .drawer  {
+  border-left: 2pt solid gray;
+  display: flex;
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.inventory-container .drawer .column {
+  min-height: -webkit-min-content;
+  flex: 0 0 auto;
+  flex-direction: row;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 15px;
+}
+
+.inventory-container footer {
+  /*flex: 0 1 40px;*/
+}
+
+.inventory-container .panel-body-table  {
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+.inventory-container .desc  {
+  max-height: 460px;
+  overflow-y: scroll;
+}
+.inventory-container mol-loading-indicator {
+  position: absolute;
+  top: 5px;
+  left: 50%;
 }

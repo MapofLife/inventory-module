@@ -24,7 +24,7 @@ var inventoryApp = angular.module('mol', [
   //'angularResizable',
   //'nvd3',
   //'ui-rangeSlider',
-  //'angular-loading-bar',
+  'angular-loading-bar',
   //'pageslide-directive',
   //'percentage',
   //'km2',

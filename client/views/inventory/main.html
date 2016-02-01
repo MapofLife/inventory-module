@@ -2,9 +2,11 @@
 <div ng-include src="'/client/views/inventory/nav.html'"></div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-6 inventory-table"><h1>Table</h1></div>
-    <div class="col-sm-6 inventory-map">
-      <leaflet></leaflet>
+    <div class="col-md-4 inventory-table"><h1>Table</h1></div>
+    <div class="col-md-8 inventory-map">
+      <div id="inventory-container" class="inventory-container">
+        <leaflet class="mol-inventory-map" />
+      </div>
     </div>
   </div>
 </div>
