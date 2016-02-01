@@ -8,12 +8,11 @@
 </head>
 <body>
   <div lass="mol-view-container" ui-view></div>
+  <link href="//mol.org/static/css/mol-basic.css" rel="stylesheet"/>
+  <script src="//mol.org/static/js/jquery.min.js"></script>
+  <script src="//mol.org/static/js/bootstrap.min.js"></script>
   {% if prod and not debug %}
   <!-- TODO: We need to change the routes to the remote assets here... maybe a directive -->
-    <link href="https://mol.org/static/css/mol-basic.css" rel="stylesheet"/>
-
-    <script src="https://mol.org/static/js/jquery.min.js"></script>
-    <script src="https://mol.org/static/js/bootstrap.min.js"></script>
     <!-- TODO: end -->
     <script src="/client/app.min.js"></script>
     <script>
@@ -26,7 +25,6 @@
     </script>
   {% else %}
     <!-- TODO: We need to change the routes to the remote assets here... maybe a directive -->
-    <link href="http://mol.org/static/css/mol-basic.css" rel="stylesheet"/>
     <script src="/client/components/jquery/dist/jquery.js"></script>
     <!-- TODO: end -->
     <link href="/client/views/inventory/main.css" rel="stylesheet"/>
