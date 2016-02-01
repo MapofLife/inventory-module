@@ -1,5 +1,4 @@
 var inventoryApp = angular.module('mol', [
-  //mol components
   //'mol.filters',
   //'mol.services',
   //'mol.auth',
@@ -17,13 +16,14 @@ var inventoryApp = angular.module('mol', [
   //'mol.consensus-map',
   //'mol.region-selector',
   //'mol.region-model-ctrl',
-  //3rd party components
+  'nemLogging',
   'ui.bootstrap',
   'ui.select',
   'ui.router',
   //'ui.checkbox',
   //'imageHelpers',
-  //'ui-leaflet',
+  'ui-leaflet',
+  //'leaflet-directive',
   //'angularResizable',
   //'ui-rangeSlider',
   //'angular-loading-bar',
@@ -48,5 +48,5 @@ inventoryApp.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider
         templateUrl: '/inventory/assets/views/inventory/main.html',
         controller: 'inventoryCtrl',
         url: '/inventory/',
-      });
+  });
 }]);

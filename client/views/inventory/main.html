@@ -1,7 +1,11 @@
-<div ng-include src="remoteUrl + '/partials/header-thin'"></div>
+<div ng-include src="molAssetsUrl + '/partials/header-thin'"></div>
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
-<div class="row">
-  <div class="col-sm-6 full-height-thin inventory-table"><h1>Table</h1></div>
-  <div class="col-sm-6 full-height-thin inventory-map"><h1>Map</h1></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 full-height-thin inventory-table"><h1>Table</h1></div>
+    <div class="col-sm-6 full-height-thin inventory-map">
+      <leaflet defaults="defaults" lf-center="center" height="480px" width="640px"></leaflet>
+    </div>
+  </div>
 </div>
-<div ng-include="remoteUrl + '/partials/footer-thin'"></div>
+<div ng-include="molAssetsUrl + '/partials/footer-thin'"></div>
