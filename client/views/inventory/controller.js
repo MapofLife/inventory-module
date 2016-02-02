@@ -3,15 +3,9 @@ var module = angular.module('mol.inventory-controllers', []);
 module.controller('inventoryCtrl', ['$scope', function($scope) {
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 }
-  }
-
-  $scope.option = {
-    provider:       {id: 0, name: ''},
-    type:           {},
-    taxonomicGroup: {},
-    region:         {},
-    temporalScope:  {}
   };
+
+  $scope.option = {};
 
   $scope.providers = [
     {id: 1, name: 'provider one'},
@@ -52,4 +46,5 @@ module.controller('inventoryCtrl', ['$scope', function($scope) {
     {id: 4, name: 'temporal scope four'},
     {id: 5, name: 'temporal scope five'},
   ];
+
 }]);
