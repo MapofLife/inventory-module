@@ -16,10 +16,6 @@
   -webkit-flex-direction: column;
   flex-direction: column;
   /*
-  position: absolute;
-  top: 0; left:0; right:0; bottom: 0;
-  min-height: 100vh;
-  overflow: hidden;
   */
 }
 
@@ -45,12 +41,12 @@
 }
 
 .mol-inventory-map {
+  -webkit-flex: 3 1 auto%;
+  flex: 3 1 auto;
+  /*
   margin: 4px;
   margin-left: 2px;
   padding: 4px;
   padding-left: 2px;
-  -webkit-flex: 3 1 auto%;
-  flex: 3 1 auto;
-  /*
   */
 }

@@ -20,7 +20,7 @@ module.controller('inventoryCtrl', ['$scope', 'leafletData', '$timeout', '$windo
         var selector = '.mol-inventory-map .leaflet-container',
             footer   = angular.element('footer').height(),
             top      = angular.element(selector).offset().top,
-            height   = size.h - top - footer - 4;
+            height   = size.h - top - footer; // - 4;
         angular.element(selector).css('height', height + 'px');
         map.invalidateSize();
       }, 300);
