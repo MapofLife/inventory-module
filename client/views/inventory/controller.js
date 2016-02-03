@@ -1,11 +1,34 @@
 var module = angular.module('mol.inventory-controllers', []);
 
-module.controller('inventoryCtrl', ['$scope', function($scope) {
+module.controller('inventoryCtrl', ['$scope', 'leafletData', '$timeout', '$window',
+      function($scope, leafletData, $timeout, $window) {
+  $scope.option = {};
+
   $scope.map = {
-    center: { lat: 0, lng: 0, zoom: 3 }
+    center: { lat: 0, lng: 0, zoom: 3 },
+    events: {
+      map: {
+        enable: ['click'],
+        logic: 'emit'
+      }
+    }
   };
 
-  $scope.option = {};
+  $scope.windowResize = function(size) {
+    leafletData.getMap().then(function(map) {
+      $timeout(function() {
+        var selector = '.mol-inventory-map .leaflet-container',
+            footer   = angular.element('footer').height(),
+            top      = angular.element(selector).offset().top,
+            height   = size.h - top - footer - 4;
+        angular.element(selector).css('height', height + 'px');
+        map.invalidateSize();
+      }, 300);
+  });};
+
+  $scope.$on('leafletDirectiveMap.click', function(event) {
+    console.log('click');
+  });
 
   $scope.providers = [
     {id: 1, name: 'provider one'},

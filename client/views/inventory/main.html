@@ -1,10 +1,9 @@
 <div ng-include="'//mol.org/partials/header-thin' | trustUrl"></div>
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
-<div class="mol-inventory container-fluid">
-  <div class="row">
-    <div class="col-md-4 inventory-table">
-      <div class="form-group">
-        <label for="provider.selected" class="control-label">Provider</label>
+<div class="mol-inventory-container">
+    <div class="mol-inventory-table">
+      <div class="mol-control">
+        <label for="provider.selected">Provider</label>
         <ui-select ng-model="option.provider">
         <ui-select-match allow-clear="true" placeholder="Select Dataset Provider">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="provider in (providers | filter: $select.search) track by provider.id">
@@ -12,8 +11,8 @@
         </ui-select-choices>
         </ui-select>
       </div>
-      <div class="form-group">
-        <label for="type" class="control-label">Type</label>
+      <div class="mol-control">
+        <label for="type">Type</label>
         <ui-select ng-model="option.type">
         <ui-select-match allow-clear="true" placeholder="Select Dataset Type">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="type in (types | filter: $select.search) track by type.id">
@@ -21,8 +20,8 @@
         </ui-select-choices>
         </ui-select>
       </div>
-      <div class="form-group">
-        <label for="taxonomicGroup" class="control-label">Taxonomic Group</label>
+      <div class="mol-control">
+        <label for="taxonomicGroup">Taxonomic Group</label>
         <ui-select ng-model="option.taxonomicGroup">
         <ui-select-match allow-clear="true" placeholder="Select Taxonomic Group">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="taxon in (taxa | filter: $select.search) track by taxon.id">
@@ -30,8 +29,8 @@
         </ui-select-choices>
         </ui-select>
       </div>
-      <div class="form-group">
-        <label for="region" class="control-label">Region</label>
+      <div class="mol-control">
+        <label for="region">Region</label>
         <ui-select ng-model="option.region">
         <ui-select-match allow-clear="true" placeholder="Select Region">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="region in (regions | filter: $select.search) track by region.id">
@@ -39,8 +38,8 @@
         </ui-select-choices>
         </ui-select>
       </div>
-      <div class="form-group">
-        <label for="temporalScope" class="control-label">Temporal Scope</label>
+      <div class="mol-control">
+        <label for="temporalScope">Temporal Scope</label>
         <ui-select ng-model="option.temporalScope">
         <ui-select-match allow-clear="true" placeholder="Select Temporal Scope">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="temporalScope in (temporalScopes | filter: $select.search) track by temporalScope.id">
@@ -49,10 +48,11 @@
         </ui-select>
       </div>
     </div>
-    <div class="col-md-8 inventory-map">
-      <leaflet width="100%" height="480px"
-        center="map.center"/>
+    <div class="mol-inventory-map">
+      <leaflet width="100%" height="480"
+        center="map.center"
+        event-broadcast="map.events"
+        mol-window-resize="windowResize" />
     </div>
-  </div>
 </div>
 <div ng-include="'//mol.org/partials/footer-thin' | trustUrl"></div>
