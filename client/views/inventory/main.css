@@ -44,9 +44,12 @@
   -webkit-flex: 3 1 auto%;
   flex: 3 1 auto;
   /*
-  margin: 4px;
-  margin-left: 2px;
-  padding: 4px;
-  padding-left: 2px;
   */
+}
+
+@media (max-width: 768px) {
+  .mol-inventory-container {
+    -webkit-flex-flow: column;
+    flex-flow: column;
+  }
 }

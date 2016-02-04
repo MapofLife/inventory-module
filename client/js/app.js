@@ -41,7 +41,8 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
     'http*://localhost**',
-    'http*://*mol.org/**'
+    'http*://*mol.org/**',
+    'http*://api.mol.org/0.x/inventory/**'
   ]);
   $urlRouterProvider.otherwise("/inventory/");
   $stateProvider.state('inventory', {

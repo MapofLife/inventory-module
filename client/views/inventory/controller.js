@@ -1,7 +1,8 @@
 var module = angular.module('mol.inventory-controllers', []);
 
-module.controller('inventoryCtrl', ['$scope', 'leafletData', '$timeout', '$window',
-      function($scope, leafletData, $timeout, $window) {
+module.controller('inventoryCtrl',
+    ['$scope', 'leafletData', '$timeout', '$window', '$http',
+    function($scope, leafletData, $timeout, $window, $http) {
   $scope.option = {};
 
   $scope.map = {
@@ -13,6 +14,11 @@ module.controller('inventoryCtrl', ['$scope', 'leafletData', '$timeout', '$windo
       }
     }
   };
+
+  $http.get('https://api.mol.org/0.x/inventory/datasets')
+    .success(function(data) {
+      console.log(data);
+    });
 
   $scope.windowResize = function(size) {
     leafletData.getMap().then(function(map) {
