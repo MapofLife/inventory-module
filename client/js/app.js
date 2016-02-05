@@ -36,7 +36,7 @@ var module = angular.module('mol', [
 
 module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
-  //$httpProvider.defaults.withCredentials = true;
+  $httpProvider.defaults.withCredentials = true;
   $locationProvider.html5Mode(true);
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
