@@ -10,6 +10,7 @@ module.controller('inventoryCtrl',
     events: { map: { enable: ['click'], logic: 'emit' } }
   };
 
+  // TODO: Use MOLApi here
   $http.get('https://api.mol.org/0.x/inventory/datasets', { withCredentials: false })
     .then(function(response) {
       $scope.data = response.data;
@@ -17,6 +18,7 @@ module.controller('inventoryCtrl',
       console.log('error', response);
     });
 
+  // TODO: Use component helper controller.js
   $scope.windowResize = function(size) {
     leafletData.getMap().then(function(map) {
       if (!size) return;
