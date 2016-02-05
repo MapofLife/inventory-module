@@ -59,6 +59,12 @@ module.filter('trustUrl', function ($sce) {
   };
 });
 
+module.filter('', function() {
+  return function(data) {
+
+  };
+});
+
 module.directive('molWindowResize', function ($window) {
   return function (scope, element, attr) {
     var func = attr.molWindowResize;

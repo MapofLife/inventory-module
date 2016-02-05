@@ -2,7 +2,7 @@
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
 <div class="mol-inventory-container">
     <div class="mol-inventory-table">
-      <div ng-repeat="field in fields" class="mol-control">
+      <div ng-repeat="field in data.fields" class="mol-control">
         <label ng-bind="field.title" for="{{field.value}}"></label>
         <ui-select ng-model="field.value">
         <ui-select-match allow-clear="true" placeholder="Select Dataset Provider">{{$select.selected.name}}</ui-select-match>

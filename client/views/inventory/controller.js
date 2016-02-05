@@ -12,19 +12,14 @@ module.controller('inventoryCtrl',
 
   $http.get('https://api.mol.org/0.x/inventory/datasets', { withCredentials: false })
     .then(function(response) {
-      $scope.fields = response.data.fields;
-      angular.forEach(response.data.rows, function(row, i) {
-        console.log(row);
-        angular.forEach(row, function(cell, j) {
-          console.log(cell);
-        });
-      });
+      $scope.data = response.data;
     }, function(response) {
       console.log('error', response);
     });
 
   $scope.windowResize = function(size) {
     leafletData.getMap().then(function(map) {
+      if (!size) return;
       $timeout(function() {
         var selector = '.mol-inventory-map .leaflet-container',
             footer   = angular.element('footer').height(),
