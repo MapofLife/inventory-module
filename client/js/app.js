@@ -25,7 +25,6 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
         controller: 'inventoryCtrl',
         url: '/inventory/',
   });
-
 }]);
 
 module.filter('trustUrl', function ($sce) {
@@ -34,9 +33,19 @@ module.filter('trustUrl', function ($sce) {
   };
 });
 
-module.filter('', function() {
-  return function(data) {
-
+// TODO Convert this to a factory
+module.filter('inventoryChoices', function() {
+  return function(rows, i) {
+    var choices = {};
+    angular.forEach(rows, function(row, j) {
+      var titles = [], values = [];
+      angular.forEach(row[i], function(cell, k) {
+        titles.push(cell.title);
+        values.push(cell.value);
+      });
+      choices[titles.join(', ')] = values.join(', ');
+    });
+    return Object.keys(choices).sort();
   };
 });
 

@@ -1,22 +1,24 @@
-<div ng-include="'//mol.org/partials/header-thin' | trustUrl" onload="windowResize()"></div>
+<div ng-include="'//mol.org/partials/header-thin' | trustUrl" mol-window-resize="windowResize"></div>
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
 <div class="mol-inventory-container">
-    <div class="mol-inventory-table">
-      <div ng-repeat="field in data.fields" class="mol-control">
-        <label ng-bind="field.title" for="{{field.value}}"></label>
-        <ui-select ng-model="field.value">
-        <ui-select-match allow-clear="true" placeholder="Select Dataset Provider">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices repeat="row in (field.rows | filter: $select.search) track by row.value">
-            <span ng-bind-html="row.title | highlight: $select.search"></span>
+  <div class="mol-inventory-table">
+    <div ng-repeat="field in data.fields" class="mol-control">
+      <label ng-bind="field.title"></label>
+      <ui-select ng-model="choice[field.value]">
+        <ui-select-match allow-clear="true" placeholder="Select {{field.title}}">
+          {{$select.selected | limitTo: 30}}
+        </ui-select-match>
+        <ui-select-choices repeat="option in options['{{field.value}}'] | filter: $select.search">
+          <small ng-bind-html="option | highlight: $select.search"></small>
         </ui-select-choices>
-        </ui-select>
-      </div>
+      </ui-select>
     </div>
-    <div class="mol-inventory-map">
-      <leaflet width="100%"
-        center="map.center"
-        event-broadcast="map.events"
-        mol-window-resize="windowResize" />
-    </div>
+  </div>
+  <div class="mol-inventory-map">
+    <leaflet width="100%"
+      center="map.center"
+      event-broadcast="map.events"
+      mol-window-resize="windowResize" />
+  </div>
 </div>
-<div ng-include="'//mol.org/partials/footer-thin' | trustUrl" onload="windowResize()"></div>
+<div ng-include="'//mol.org/partials/footer-thin' | trustUrl" mol-window-resize="windowResize"></div>

@@ -15,8 +15,6 @@
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  /*
-  */
 }
 
 .mol-inventory-container {
@@ -24,8 +22,6 @@
   display: flex;
   -webkit-flex-flow: row;
   flex-flow: row;
-  /*
-  */
 }
 
 .mol-inventory-table {
@@ -36,15 +32,16 @@
   -webkit-flex: 2 1 auto;
   flex: 2 1 auto;
   max-width: 300px;
-  /*
-  */
 }
 
 .mol-inventory-map {
   -webkit-flex: 3 1 auto%;
   flex: 3 1 auto;
-  /*
-  */
+}
+
+.mol-inventory-container small {
+  white-space: normal;
+  text-indent: hanging;
 }
 
 @media (max-width: 768px) {
