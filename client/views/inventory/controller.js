@@ -13,6 +13,7 @@ module.controller('inventoryCtrl',
 
   MOLApi('inventory/datasets').then(function(response) {
     $scope.data = response.data;
+    // TODO migrate this loop into app.js logic
     angular.forEach($scope.data.fields, function(field, i) {
       $scope.options[field.value] = $filter('inventoryChoices')($scope.data.rows, i);
     });

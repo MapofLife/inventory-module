@@ -33,17 +33,21 @@ module.filter('trustUrl', function ($sce) {
   };
 });
 
-// TODO Convert this to a factory
+// TODO Combine with controller logic
 module.filter('inventoryChoices', function() {
   return function(rows, i) {
     var choices = {};
     angular.forEach(rows, function(row, j) {
-      var titles = [], values = [];
+      var titles = [], values = [], key = '', value = '';
       angular.forEach(row[i], function(cell, k) {
         titles.push(cell.title);
         values.push(cell.value);
       });
-      choices[titles.join(', ')] = values.join(', ');
+      key = titles.join(', ');
+      value = values.join(', ');
+      if ( key && value ) {
+        choices[key] = value;
+      }
     });
     return Object.keys(choices).sort();
   };
@@ -57,7 +61,7 @@ module.directive('molWindowResize', function ($window) {
         'h': window.innerHeight,
         'w': window.innerWidth
       };},
-      function (newValue, oldValue) {
+      function(newValue, oldValue) {
         scope[func](newValue, oldValue);
       }, true);
       angular.element($window).bind('resize', function () {
