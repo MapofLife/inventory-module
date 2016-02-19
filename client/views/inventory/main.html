@@ -2,13 +2,13 @@
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
 <div class="mol-inventory-container">
   <div class="mol-inventory-table">
-    <div ng-repeat="field in data.fields" class="mol-control">
+    <div ng-repeat="field in fields" class="mol-control">
       <label ng-bind="field.title"></label>
-      <ui-select ng-model="choice[field.value]">
+      <ui-select ng-model="choices[$index]">
         <ui-select-match allow-clear="true" placeholder="Select {{field.title}}">
           {{$select.selected | limitTo: 30}}
         </ui-select-match>
-        <ui-select-choices repeat="option in options['{{field.value}}'] | filter: $select.search">
+        <ui-select-choices repeat="option in rows | filterRows: choices : $parent.$index | filter: $select.search">
           <small ng-bind-html="option | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>

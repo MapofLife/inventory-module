@@ -1,4 +1,4 @@
-var module = angular.module('mol', [
+var module = angular.module('mol.inventory', [
   'ui.select',
   'ui.router',
   'ui-leaflet',
@@ -27,33 +27,52 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
   });
 }]);
 
-module.filter('trustUrl', function ($sce) {
+module.filter('trustUrl', function($sce) {
   return function(url) {
     return $sce.trustAsResourceUrl(url);
   };
 });
 
-// TODO Combine with controller logic
-module.filter('inventoryChoices', function() {
-  return function(rows, i) {
-    var choices = {};
+module.filter('unsafe', function($sce) {
+  return function(str) {
+    return $sce.trustAsHtml(str);
+  };
+});
+
+module.filter('filterRows', function() {
+  return function(rows, choices, column) {
+    var options = {};
     angular.forEach(rows, function(row, j) {
-      var titles = [], values = [], key = '', value = '';
-      angular.forEach(row[i], function(cell, k) {
+      var titles = [], values = [] key = '';
+      angular.forEach(row[column], function(cell, k){
         titles.push(cell.title);
         values.push(cell.value);
       });
       key = titles.join(', ');
-      value = values.join(', ');
-      if ( key && value ) {
-        choices[key] = value;
-      }
+
     });
-    return Object.keys(choices).sort();
+    
+    return Object.keys(options).sort();
   };
 });
 
-module.directive('molWindowResize', function ($window) {
+filterChoices = function(rows, i) {
+      angular.forEach(rows, function(row, j) {
+        var titles = [], values = [], key = '', value = '';
+        angular.forEach(row[i], function(cell, k) {
+          titles.push(cell.title);
+          values.push(cell.value);
+        });
+        key = titles.join(', ');
+        value = values.join(', ');
+        if ( key && value ) {
+          options[key] = value;
+        }
+      });
+      return Object.keys(options).sort();
+    };
+
+module.directive('molWindowResize', function($window) {
   return function (scope, element, attr) {
     var func = attr.molWindowResize;
     scope.$watch(function () {
@@ -64,7 +83,7 @@ module.directive('molWindowResize', function ($window) {
       function(newValue, oldValue) {
         scope[func](newValue, oldValue);
       }, true);
-      angular.element($window).bind('resize', function () {
+      angular.element($window).bind('resize', function() {
         scope.$apply();
       });
     };

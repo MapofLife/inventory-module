@@ -3,21 +3,23 @@ var module = angular.module('mol.inventory-controllers', []);
 module.controller('inventoryCtrl',
     ['$scope', 'leafletData', '$timeout', '$window', '$http', '$filter', 'MOLApi',
     function($scope, leafletData, $timeout, $window, $http, $filter, MOLApi) {
-  $scope.choice = {};
-  $scope.options = {};
+  $scope.fields  = [];
+  $scope.rows    = [];
+  $scope.choices = [];
+  $scope.options = [];
 
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 },
     events: { map: { enable: ['click'], logic: 'emit' } }
   };
 
-  MOLApi('inventory/datasets').then(function(response) {
-    $scope.data = response.data;
-    // TODO migrate this loop into app.js logic
-    angular.forEach($scope.data.fields, function(field, i) {
-      $scope.options[field.value] = $filter('inventoryChoices')($scope.data.rows, i);
+  $scope.initialize = function() {
+    MOLApi('inventory/datasets').then(function(response) {
+      $scope.fields = response.data.fields;
+      $scope.rows = response.data.rows;
+      console.log($scope.rows);
     });
-  });
+  };
 
   // TODO: Use component helper
   $scope.windowResize = function(size) {
@@ -31,5 +33,7 @@ module.controller('inventoryCtrl',
         map.invalidateSize();
       }, 300);
   });};
+
+  $scope.initialize();
 
 }]);
