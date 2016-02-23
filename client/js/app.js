@@ -39,38 +39,13 @@ module.filter('unsafe', function($sce) {
   };
 });
 
-module.filter('filterRows', function() {
-  return function(rows, choices, column) {
-    var options = {};
-    angular.forEach(rows, function(row, j) {
-      var titles = [], values = [] key = '';
-      angular.forEach(row[column], function(cell, k){
-        titles.push(cell.title);
-        values.push(cell.value);
-      });
-      key = titles.join(', ');
-
+module.filter('unique', function() {
+  return function(list) {
+    return list.sort().filter(function(item, i, self) {
+      return self.indexOf(item) === i && item.trim();
     });
-    
-    return Object.keys(options).sort();
   };
 });
-
-filterChoices = function(rows, i) {
-      angular.forEach(rows, function(row, j) {
-        var titles = [], values = [], key = '', value = '';
-        angular.forEach(row[i], function(cell, k) {
-          titles.push(cell.title);
-          values.push(cell.value);
-        });
-        key = titles.join(', ');
-        value = values.join(', ');
-        if ( key && value ) {
-          options[key] = value;
-        }
-      });
-      return Object.keys(options).sort();
-    };
 
 module.directive('molWindowResize', function($window) {
   return function (scope, element, attr) {

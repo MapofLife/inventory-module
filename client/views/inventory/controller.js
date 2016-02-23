@@ -16,12 +16,49 @@ module.controller('inventoryCtrl',
   $scope.initialize = function() {
     MOLApi('inventory/datasets').then(function(response) {
       $scope.fields = response.data.fields;
-      $scope.rows = response.data.rows;
-      console.log($scope.rows);
+      $scope.fields.forEach(function(field, f) {
+        $scope.options[f] = [];
+        $scope.choices[f] = '';
+      });
+      response.data.rows.forEach(function(row, r) {
+        var new_row = { filters: [], titles: [], values: [], row: row };
+        $scope.fields.forEach(function(field, f) {
+          new_row.titles[f] = [];
+          new_row.values[f] = [];
+          row[f].forEach(function(cell, c) {
+            new_row.titles[f].push(cell.title);
+            new_row.values[f].push(cell.value);
+          });
+          new_row.filters[f] = new_row.titles[f].join(', ');
+          $scope.rows.push(new_row);
+        });
+      });
+      $scope.filterOptions();
     });
   };
 
-  // TODO: Use component helper
+  $scope.filterOptions = function() {
+    var options = [];
+    $scope.fields.forEach(function(field, f) { options[f] = []; });
+    $scope.rows.filter(function(row, r) {
+      var keep = true;
+      row.filters.forEach(function(filter, f) {
+        keep = keep && (!$scope.choices[f] || $scope.choices[f] == filter);
+      });
+      return keep;
+    }).forEach(function(row, r) {
+      row.filters.forEach(function(filter, f) {
+        options[f].push(filter);
+      });
+    });
+    options.forEach(function(opts, i) {
+      $scope.options[i] = options[i].sort().filter(function(option, j, self) {
+        return self.indexOf(option) === j && option.trim();
+      });
+    });
+    console.log($scope.options);
+  };
+
   $scope.windowResize = function(size) {
     leafletData.getMap().then(function(map) {
       $timeout(function() {
