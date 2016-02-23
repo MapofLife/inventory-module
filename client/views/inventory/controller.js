@@ -17,32 +17,20 @@ module.controller('inventoryCtrl',
     MOLApi('inventory/datasets').then(function(response) {
       $scope.rows = response.data.rows;
       $scope.fields = response.data.fields;
-      $scope.fields.forEach(function(field, f) { $scope.choices[f] = ''; });
+      $scope.fields.forEach(function(field, f) {
+        $scope.options[f] = [];
+        $scope.choices[f] = '';
+      });
       $scope.filterOptions();
     });
   };
 
   $scope.filterOptions = function() {
-    $scope.fields.forEach(function(field, f) { $scope.options[f] = []; });
-    $scope.rows.filter(function(row) {
-      return row.every(function(column, c) {
-        return column.some(function(datum) {
-          return !$scope.choices[c] || $scope.choices[c] == datum.title;
-        });
-      });
-    }).forEach(function(row) {
-      row.forEach(function(column, c) {
-        var titles = [];
-        column.forEach(function(datum) { titles.push(datum.title); });
-        $scope.options[c].push(titles.join(', '));
-      });
-    });
+    var rows = $filter('filterRows')($scope.rows, $scope.choices);
+    $scope.options = $filter('getOptions')(rows);
     $scope.options.forEach(function(opts, i) {
-      $scope.options[i] = $scope.options[i].sort().filter(function(option, j, self) {
-        return self.indexOf(option) === j && option.trim();
-      });
+      $scope.options[i] = $filter('unique')($scope.options[i]);
     });
-    console.log($scope.options);
   };
 
   $scope.windowResize = function(size) {
