@@ -15,44 +15,30 @@ module.controller('inventoryCtrl',
 
   $scope.initialize = function() {
     MOLApi('inventory/datasets').then(function(response) {
+      $scope.rows = response.data.rows;
       $scope.fields = response.data.fields;
-      $scope.fields.forEach(function(field, f) {
-        $scope.options[f] = [];
-        $scope.choices[f] = '';
-      });
-      response.data.rows.forEach(function(row, r) {
-        var new_row = { filters: [], titles: [], values: [], row: row };
-        $scope.fields.forEach(function(field, f) {
-          new_row.titles[f] = [];
-          new_row.values[f] = [];
-          row[f].forEach(function(cell, c) {
-            new_row.titles[f].push(cell.title);
-            new_row.values[f].push(cell.value);
-          });
-          new_row.filters[f] = new_row.titles[f].join(', ');
-          $scope.rows.push(new_row);
-        });
-      });
+      $scope.fields.forEach(function(field, f) { $scope.choices[f] = ''; });
       $scope.filterOptions();
     });
   };
 
   $scope.filterOptions = function() {
-    var options = [];
-    $scope.fields.forEach(function(field, f) { options[f] = []; });
-    $scope.rows.filter(function(row, r) {
-      var keep = true;
-      row.filters.forEach(function(filter, f) {
-        keep = keep && (!$scope.choices[f] || $scope.choices[f] == filter);
+    $scope.fields.forEach(function(field, f) { $scope.options[f] = []; });
+    $scope.rows.filter(function(row) {
+      return row.every(function(column, c) {
+        return column.some(function(datum) {
+          return !$scope.choices[c] || $scope.choices[c] == datum.title;
+        });
       });
-      return keep;
-    }).forEach(function(row, r) {
-      row.filters.forEach(function(filter, f) {
-        options[f].push(filter);
+    }).forEach(function(row) {
+      row.forEach(function(column, c) {
+        var titles = [];
+        column.forEach(function(datum) { titles.push(datum.title); });
+        $scope.options[c].push(titles.join(', '));
       });
     });
-    options.forEach(function(opts, i) {
-      $scope.options[i] = options[i].sort().filter(function(option, j, self) {
+    $scope.options.forEach(function(opts, i) {
+      $scope.options[i] = $scope.options[i].sort().filter(function(option, j, self) {
         return self.indexOf(option) === j && option.trim();
       });
     });
@@ -72,5 +58,4 @@ module.controller('inventoryCtrl',
   });};
 
   $scope.initialize();
-
 }]);
