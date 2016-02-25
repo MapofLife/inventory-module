@@ -31,6 +31,32 @@ module.controller('inventoryCtrl',
     $scope.options.forEach(function(opts, i) {
       $scope.options[i] = $filter('unique')($scope.options[i]);
     });
+    $scope.inventoryQuery();
+  };
+
+  $scope.inventoryQuery = function() {
+    var params = {};
+    $scope.choices.forEach(function(choice, c) {
+      var terms = [];
+      if (choice) {
+        $scope.rows.forEach(function(row) {
+          var titles = [];
+          var values = [];
+          row[c].forEach(function(datum) {
+            titles.push(datum.title);
+            values.push(datum.value);
+          });
+          if (titles.join(', ') == choice) {
+            terms = terms.concat(values);
+          }
+        });
+        params[$scope.fields[c].value] = $filter('unique')(terms);
+      }
+    });
+    if (!Object.keys(params).length) { return; }
+    MOLApi('inventory/maps', params, 'POST').then(function(response) {
+      console.log(response);
+    });
   };
 
   $scope.windowResize = function(size) {

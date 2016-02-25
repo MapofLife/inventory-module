@@ -92,15 +92,15 @@ module.directive('molWindowResize', function($window) {
 });
 
 module.factory('MOLApi', ['$http', function($http) {
-		return function(service, params, canceller, loading) {
+		return function(service, params, method, canceller, loading) {
 			loading = (typeof loading === undefined) ? false : loading;
 			return $http({
-				method:'GET',
+				method: method || 'GET',
 				url: 'https://api.mol.org/0.x/{0}'.format(service),
 				params: params,
 				withCredentials: false,
 				cache: true,
-				timeout: (canceller) ? canceller.promise : undefined,
+				timeout: canceller ? canceller.promise : undefined,
 				ignoreLoadingBar: loading
 			});
 		};

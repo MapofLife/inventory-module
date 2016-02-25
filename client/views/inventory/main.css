@@ -1,3 +1,9 @@
+.fa-spinner {
+  position: absolute;
+  top: 200px;
+  left: 75px;
+}
+
 .mol-inventory-container a {
   color: black;
 }
