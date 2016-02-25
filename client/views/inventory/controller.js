@@ -53,10 +53,11 @@ module.controller('inventoryCtrl',
         params[$scope.fields[c].value] = $filter('unique')(terms);
       }
     });
-    if (!Object.keys(params).length) { return; }
-    MOLApi('inventory/maps', params, 'POST').then(function(response) {
-      console.log(response);
-    });
+    if (Object.keys(params).length) {
+      MOLApi('inventory/maps', params, 'POST').then(function(response) {
+        console.log(response);
+      });
+    }
   };
 
   $scope.windowResize = function(size) {
