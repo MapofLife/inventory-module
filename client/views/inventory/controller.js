@@ -10,7 +10,17 @@ module.controller('inventoryCtrl',
 
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 },
-    events: { map: { enable: ['click'], logic: 'emit' } }
+    events: { map: { enable: ['click'], logic: 'emit' } },
+    layers: {
+      baselayers: {
+        xyz: {
+          name: 'OpenStreetMap (XYZ)',
+          url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          type: 'xyz'
+        }
+      },
+
+    }
   };
 
   $scope.initialize = function() {
@@ -38,6 +48,7 @@ module.controller('inventoryCtrl',
     var params = {};
     $scope.choices.forEach(function(choice, c) {
       var terms = [];
+      var rows = $filter('filterRows')($scope.rows, $scope.choices);
       if (choice) {
         $scope.rows.forEach(function(row) {
           var titles = [];
@@ -54,8 +65,22 @@ module.controller('inventoryCtrl',
       }
     });
     if (Object.keys(params).length) {
-      MOLApi('inventory/maps', params, 'POST').then(function(response) {
-        console.log(response);
+      var url = 'http://dev.api-0-x.map-of-life.appspot.com/0.x/inventory/maps?';
+      Object.keys(params).forEach(function(key) {
+        url += key + '=' + params[key].join(',') + '&';
+      });
+      url += 'callback=JSON_CALLBACK';
+      console.log(url);
+      $http.jsonp(url).then(function(response) {
+       console.log(response.data.tile_url);
+       $scope.map.layers.overlays = {
+         xyz: {
+           name: 'Datasets',
+           visible: true,
+           url:  response.data.tile_url,
+           type: 'xyz'
+         }
+       };
       });
     }
   };

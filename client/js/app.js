@@ -17,7 +17,8 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
     'self',
     'http*://localhost**',
     'http*://*mol.org/**',
-    'http*://api.mol.org/0.x/inventory/**'
+    'http*://api.mol.org/0.x/inventory/**',
+    'http*://dev.api-0-x.map-of-life.appspot.com//0.x/inventory/**'
   ]);
   $urlRouterProvider.otherwise("/inventory/");
   $stateProvider.state('inventory', {
@@ -96,7 +97,8 @@ module.factory('MOLApi', ['$http', function($http) {
 			loading = (typeof loading === undefined) ? false : loading;
 			return $http({
 				method: method || 'GET',
-				url: 'https://api.mol.org/0.x/{0}'.format(service),
+        url: 'https://api.mol.org/0.x/{0}'.format(service),
+				url: 'http://dev.api-0-x.map-of-life.appspot.com//0.x/{0}'.format(service),
 				params: params,
 				withCredentials: false,
 				cache: true,
