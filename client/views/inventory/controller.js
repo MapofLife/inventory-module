@@ -81,7 +81,7 @@ module.controller('inventoryCtrl',
          }
        };
       });
-    } else {
+    } else if ($scope.map.layers.overlays) {
       $scope.map.layers.overlays.xyz = undefined;
     }
   };
