@@ -19,7 +19,6 @@ module.controller('inventoryCtrl',
           type: 'xyz'
         }
       },
-
     }
   };
 
@@ -70,7 +69,6 @@ module.controller('inventoryCtrl',
         url += key + '=' + params[key].join(',') + '&';
       });
       url += 'callback=JSON_CALLBACK';
-      console.log(url);
       $http.jsonp(url).then(function(response) {
        console.log(response.data.tile_url);
        $scope.map.layers.overlays = {
@@ -78,10 +76,13 @@ module.controller('inventoryCtrl',
            name: 'Datasets',
            visible: true,
            url:  response.data.tile_url,
-           type: 'xyz'
+           type: 'xyz',
+           doRefresh: true
          }
        };
       });
+    } else {
+      $scope.map.layers.overlays.xyz = undefined;
     }
   };
 
