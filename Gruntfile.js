@@ -67,6 +67,7 @@ module.exports = function(grunt) {
             "client/components/mol-ui-components/services/component.min.js",
             "client/components/mol-ui-components/filters/component.min.js",
             "client/js/app.js"
+            "client/js/filters.js"
           ]
         }
       }

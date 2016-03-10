@@ -2,9 +2,10 @@
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
 <div class="mol-inventory-container">
   <div class="mol-inventory-table">
+    <mol-facet type="text" ng-model="qq"/>
     <div ng-repeat="field in fields" class="mol-control">
       <label ng-bind="field.title"></label>
-      <ui-select ng-model="choices[$index]" on-select="filterOptions()">
+      <ui-select ng-model="facets[$index]" on-select="filterOptions()">
         <ui-select-match allow-clear="true" placeholder="Select {{field.title}}">
           {{$select.selected | limitTo: 30}}
         </ui-select-match>

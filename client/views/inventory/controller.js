@@ -5,7 +5,7 @@ module.controller('inventoryCtrl',
     function($scope, leafletData, $timeout, $window, $http, $filter, MOLApi) {
   $scope.fields  = [];
   $scope.rows    = [];
-  $scope.choices = [];
+  $scope.facets  = [];
   $scope.options = [];
 
   $scope.map = {
@@ -26,16 +26,17 @@ module.controller('inventoryCtrl',
     MOLApi('inventory/datasets').then(function(response) {
       $scope.rows = response.data.rows;
       $scope.fields = response.data.fields;
+      console.log($scope.fields);
       $scope.fields.forEach(function(field, f) {
         $scope.options[f] = [];
-        $scope.choices[f] = '';
+        $scope.facets[f] = '';
       });
       $scope.filterOptions();
     });
   };
 
   $scope.filterOptions = function() {
-    var rows = $filter('filterRows')($scope.rows, $scope.choices);
+    var rows = $filter('filterRows')($scope.rows, $scope.facets);
     $scope.options = $filter('getOptions')(rows);
     $scope.options.forEach(function(opts, i) {
       $scope.options[i] = $filter('unique')($scope.options[i]);
@@ -45,9 +46,9 @@ module.controller('inventoryCtrl',
 
   $scope.inventoryQuery = function() {
     var params = {};
-    $scope.choices.forEach(function(choice, c) {
+    $scope.facets.forEach(function(choice, c) {
       var terms = [];
-      var rows = $filter('filterRows')($scope.rows, $scope.choices);
+      var rows = $filter('filterRows')($scope.rows, $scope.facets);
       if (choice) {
         $scope.rows.forEach(function(row) {
           var titles = [];

@@ -1,4 +1,4 @@
-var module = angular.module('mol.inventory', [
+window.module = angular.module('mol.inventory', [
   'ui.select',
   'ui.router',
   'ui-leaflet',
@@ -28,52 +28,19 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
   });
 }]);
 
-module.filter('trustUrl', function($sce) {
-  return function(url) {
-    return $sce.trustAsResourceUrl(url);
+module.directive('molFacet', [function() {
+  return {
+    restrict: 'E',
+    link: function(scope, elt, attrs, ctrl) {
+      scope.$watch(function() {
+        var facet = attrs.ngModel;
+        return facet;
+      }, function(newValue, oldValue, scope) {
+        console.log(scope.facet);
+      }, true);
+    }
   };
-});
-
-module.filter('unsafe', function($sce) {
-  return function(str) {
-    return $sce.trustAsHtml(str);
-  };
-});
-
-module.filter('unique', function() {
-  return function(values) {
-    return values.sort().filter(function(value, j, self) {
-      return self.indexOf(value) === j && value.trim();
-    });
-  };
-});
-
-module.filter('filterRows', function() {
-  return function(rows, choices) {
-    return rows.filter(function(row) {
-      return row.every(function(column, c) {
-        return column.some(function(datum) {
-          return !choices[c] || choices[c] == datum.title;
-        });
-      });
-    });
-  };
-});
-
-module.filter('getOptions', function() {
-  return function(rows) {
-    var options = [];
-    rows[0].forEach(function(column, c) { options[c] = []; });
-    rows.forEach(function(row) {
-      row.forEach(function(column, c) {
-        var titles = [];
-        column.forEach(function(datum) { titles.push(datum.title); });
-        options[c].push(titles.join(', '));
-      });
-    });
-    return options;
-  };
-});
+}]);
 
 module.directive('molWindowResize', function($window) {
   return function (scope, element, attr) {
