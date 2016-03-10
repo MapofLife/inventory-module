@@ -1,0 +1,12 @@
+<div class="mol-facet">
+  <uib-accordion close-others="false">
+    <uib-accordion-group ng-repeat="header in headers track by $index" is-open="status.open" heading="{{header.title}}">
+      <div ng-repeat="option in options[$index]">
+        <label>
+          <input type="checkbox" />
+          <small ng-bind-html="option"></small>
+        </label>
+      </div>
+    </uib-accordion-group>
+  </uib-accordion>
+</div>
