@@ -2,7 +2,7 @@
 <div ng-include src="'/inventory/assets/views/inventory/nav.html'"></div>
 <div class="mol-inventory-container">
   <div class="mol-inventory-table">
-    <mol-facet data-rows="rows" data-headers="fields" data-choices="choices"/>
+    <mol-facets data-facets="facets" data-choices="choices"/>
   </div>
   <div class="mol-inventory-map">
     <leaflet width="100%"
@@ -12,5 +12,5 @@
       mol-window-resize="windowResize" />
   </div>
 </div>
-<i ng-if="!fields.length" class="fa fa-spinner fa-spin fa-4x"></i>
+<i ng-if="!choices.length" class="fa fa-spinner fa-spin fa-4x"></i>
 <div ng-include="'//mol.org/partials/footer-thin' | trustUrl" mol-window-resize="windowResize"></div>

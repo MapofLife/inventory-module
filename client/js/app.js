@@ -6,6 +6,7 @@ window.module = angular.module('mol.inventory', [
   'ngSanitize',
   'ngCookies',
   'ui.bootstrap',
+  'mol.facets',
   'mol.inventory-controllers'
 ]);
 
@@ -26,70 +27,6 @@ module.config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$u
         controller: 'inventoryCtrl',
         url: '/inventory/',
   });
-}]);
-
-module.directive('molFacet', [function() {
-  return {
-    restrict: 'E',
-    templateUrl: '/inventory/assets/views/inventory/mol-facet.html',
-    scope: {
-      headers: '=',  // Change to '<' when we go to Angular v1.5
-      rows:    '=',  // Change to '<' when we go to Angular v1.5
-      choices: '='   // Keep as '='
-    },
-    link: function(scope, element, attrs) {
-      scope.$watch('headers', function(newVal, oldVal) {
-        scope.resetOptions();
-      });
-    },
-    controller: ['$scope', '$filter', function($scope, $filter) {
-      $scope.options = [];
-
-      $scope.resetOptions = function() {
-        if ($scope.headers) {
-          $scope.headers.forEach(function(header, h) {
-            $scope.options[h] = [];
-            if ($scope.choices) {
-              $scope.choices[h] = '';
-              $scope.filterOptions();
-            }
-          });
-        }
-      };
-
-      $scope.filterOptions = function() {
-        var rows = $scope.filterRows($scope.rows, $scope.choices);
-        $scope.options = $scope.getOptions(rows);
-        $scope.options.forEach(function(opts, i) {
-          $scope.options[i] = $filter('unique')($scope.options[i]);
-        });
-      };
-
-      $scope.filterRows = function(rows, choices) {
-        return rows.filter(function(row) {
-          return row.every(function(column, c) {
-            return column.some(function(datum) {
-              return !choices[c] || choices[c] == datum.title;
-            });
-          });
-        });
-      };
-
-      $scope.getOptions = function(rows) {
-        var options = [];
-        rows[0].forEach(function(column, c) { options[c] = []; });
-        rows.forEach(function(row) {
-          row.forEach(function(column, c) {
-            var titles = [];
-            column.forEach(function(datum) { titles.push(datum.title); });
-            options[c].push(titles.join(', '));
-          });
-        });
-        return options;
-      };
-
-    }]
-  };
 }]);
 
 module.directive('molWindowResize', function($window) {

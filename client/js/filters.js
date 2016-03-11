@@ -11,11 +11,3 @@ module.filter('unsafe', function($sce) {
     return $sce.trustAsHtml(str);
   };
 });
-
-module.filter('unique', function() {
-  return function(values) {
-    return values.sort().filter(function(value, j, self) {
-      return self.indexOf(value) === j && value.trim();
-    });
-  };
-});

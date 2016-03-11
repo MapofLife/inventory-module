@@ -1,0 +1,16 @@
+<div class="mol-facets">
+  <uib-accordion close-others="false">
+    <uib-accordion-group ng-repeat="field in fields track by $index"
+                         is-open="status.open"
+                         heading="{{field.title}}">
+      <div ng-repeat="option in options[$index]">
+        <label>
+          <input type="checkbox"
+                 ng-model="values[$parent.$index][option.value]"
+                 ng-change="optionClicked({{$parent.$index}}, {{option}})"/>
+          <small ng-bind-html="option.title"></small>
+        </label>
+      </div>
+    </uib-accordion-group>
+  </uib-accordion>
+</div>
