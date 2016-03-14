@@ -54,7 +54,7 @@ module.controller('inventoryCtrl',
          }
        };
       });
-    } else if ($scope.map.layers.overlays) {
+    } else {
       $scope.map.layers.overlays = {};
     }
   };
