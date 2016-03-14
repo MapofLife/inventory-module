@@ -32,6 +32,8 @@ angular.module('mol.facets', [])
         $scope.filterOptions = function(keep_facet_unchanged) {
           var unchanged = keep_facet_unchanged === undefined ? -1 : keep_facet_unchanged;
           var rows = $scope.filterRows();
+          console.log(rows.length);
+          console.log($scope.choices);
           var option_keys = [];
           var option_values = [];
           $scope.fields.forEach(function(field, f) {
@@ -76,6 +78,12 @@ angular.module('mol.facets', [])
             $scope.choices[facet] = $scope.choices[facet].filter(function(choice) { return choice != selection.value; });
           }
           $scope.filterOptions(facet);
+        };
+
+        $scope.clearClicked = function(event) {
+          console.log(event);
+          event.preventDefault();
+          event.stopPropagation();
         };
 
       }]
