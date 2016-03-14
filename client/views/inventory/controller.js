@@ -4,6 +4,9 @@ module.controller('inventoryCtrl',
     ['$scope', 'leafletData', '$timeout', '$window', '$http', '$filter', 'MOLApi',
     function($scope, leafletData, $timeout, $window, $http, $filter, MOLApi) {
 
+  $scope.choices = {};
+  $scope.ready = false;
+
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 },
     events: { map: { enable: ['click'], logic: 'emit' } },
@@ -19,29 +22,21 @@ module.controller('inventoryCtrl',
   };
 
   $scope.initialize = function() {
+    $scope.$watchCollection('choices', function() {
+      $scope.inventoryQuery();
+    });
+
     MOLApi('inventory/datasets').then(function(response) {
       $scope.facets = response.data;
+      $scope.ready = true;
     });
   };
 
   $scope.inventoryQuery = function() {
     var params = {};
-    $scope.choices.forEach(function(choice, c) {
-      var terms = [];
-      var rows = $filter('filterRows')($scope.rows, $scope.choices);
-      if (choice) {
-        $scope.rows.forEach(function(row) {
-          var titles = [];
-          var values = [];
-          row[c].forEach(function(datum) {
-            titles.push(datum.title);
-            values.push(datum.value);
-          });
-          if (titles.join(', ') == choice) {
-            terms = terms.concat(values);
-          }
-        });
-        params[$scope.fields[c].value] = $filter('unique')(terms);
+    angular.forEach($scope.choices, function(options, facet) {
+      if (options.length) {
+        params[facet] = options;
       }
     });
     if (Object.keys(params).length) {
@@ -51,7 +46,6 @@ module.controller('inventoryCtrl',
       });
       url += 'callback=JSON_CALLBACK';
       $http.jsonp(url).then(function(response) {
-       console.log(response.data.tile_url);
        $scope.map.layers.overlays = {
          xyz: {
            name: 'Datasets',
@@ -63,7 +57,7 @@ module.controller('inventoryCtrl',
        };
       });
     } else if ($scope.map.layers.overlays) {
-      $scope.map.layers.overlays.xyz = undefined;
+      $scope.map.layers.overlays = {};
     }
   };
 
