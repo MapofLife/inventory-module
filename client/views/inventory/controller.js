@@ -33,17 +33,15 @@ module.controller('inventoryCtrl',
   };
 
   $scope.inventoryQuery = function() {
-    var params = {};
+    var url = 'http://dev.api-0-x.map-of-life.appspot.com/0.x/inventory/maps?';
+    var yes = false;
     angular.forEach($scope.choices, function(options, facet) {
       if (options.length) {
-        params[facet] = options;
+        url += facet + '=' + options.join(',') + '&';
+        yes = true;
       }
     });
-    if (Object.keys(params).length) {
-      var url = 'http://dev.api-0-x.map-of-life.appspot.com/0.x/inventory/maps?';
-      Object.keys(params).forEach(function(key) {
-        url += key + '=' + params[key].join(',') + '&';
-      });
+    if (yes) {
       url += 'callback=JSON_CALLBACK';
       $http.jsonp(url).then(function(response) {
        $scope.map.layers.overlays = {
