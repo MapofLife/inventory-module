@@ -32,7 +32,6 @@ module.controller('inventoryCtrl',
   };
 
   $scope.inventoryQuery = function() {
-<<<<<<< HEAD:client/views/controller.js
     var params = {};
     angular.forEach(
       $scope.choices,
