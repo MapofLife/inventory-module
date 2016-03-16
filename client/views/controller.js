@@ -32,6 +32,7 @@ module.controller('inventoryCtrl',
   };
 
   $scope.inventoryQuery = function() {
+<<<<<<< HEAD:client/views/controller.js
     var params = {};
     angular.forEach(
       $scope.choices,
@@ -65,7 +66,7 @@ module.controller('inventoryCtrl',
          }
        };
       });
-    } else if ($scope.map.layers.overlays) {
+    } else {
       $scope.map.layers.overlays = {};
     }
   };
