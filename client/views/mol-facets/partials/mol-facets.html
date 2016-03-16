@@ -1,18 +1,29 @@
 <div class="mol-facets">
-  <uib-accordion close-others="false">
-    <uib-accordion-group ng-repeat="field in fields track by $index" is-open="status.open">
-      <uib-accordion-heading>
+  <div
+     ng-repeat="field in facets.fields track by $index"
+     is-open="status.open">
+    <div class="views-inventory-facet-group-title">
+      <i ng-click="c=(c==undefined)?true:!c;"
+        class="pull-right clickable fa"
+        ng-class="{'fa-caret-down':!c, 'fa-caret-up':c}"></i>
+      <i
+        class="pull-right clickable fa fa-times"
+        ng-show="choices[field.value]"
+        ng-click="choices[field.value]=undefined"></i>
+      <h4 class="left">
         {{field.title}}
-        <button class="btn btn-xs pull-right" ng-click="clearClicked($event, $index)">x</button>
-      </uib-accordion-heading>
-      <div ng-repeat="option in options[$index]">
-        <label>
+      </h4>
+
+
+    </div>
+    <div class="col-xs-offset-1" uib-collapse="c" ng-repeat="
+      (value, group) in facets.rows.map(getColumn($index)) |
+        flatten:shallow | orderBy:'title' | groupBy:'value' ">
+        <label class="clickable">
           <input type="checkbox"
-                 ng-model="values[$parent.$index][option.value]"
-                 ng-change="optionClicked({{$parent.$index}}, {{option}})"/>
-          <small ng-bind-html="option.title"></small>
+                 ng-model="choices[field.value][value]">
+          {{group[0].title}}&nbsp;({{group.length}})
         </label>
-      </div>
-    </uib-accordion-group>
-  </uib-accordion>
+    </div>
+  </div>
 </div>

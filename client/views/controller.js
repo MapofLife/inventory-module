@@ -5,7 +5,7 @@ module.controller('inventoryCtrl',
     function($scope, leafletData, $timeout, $window, $http, $filter, MOLApi) {
 
   $scope.choices = {};
-  $scope.ready = false;
+
 
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 },
@@ -22,25 +22,34 @@ module.controller('inventoryCtrl',
   };
 
   $scope.initialize = function() {
-    $scope.$watchCollection('choices', function() {
+    $scope.$watch('choices', function() {
       $scope.inventoryQuery();
-    });
+    },true);
 
     MOLApi('inventory/datasets').then(function(response) {
       $scope.facets = response.data;
-      $scope.ready = true;
     });
   };
 
   $scope.inventoryQuery = function() {
     var params = {};
-    angular.forEach($scope.choices, function(options, facet) {
-      if (options.length) {
-        params[facet] = options;
-      }
-    });
+    angular.forEach(
+      $scope.choices,
+      function(options, facet) {
+        angular.forEach(
+          options,
+          function(value, option) {
+              if(value) {
+                  if(!params[facet]) {
+                    params[facet] = []
+                  }
+                  params[facet].push(option)
+              }
+          }
+          );
+      });
     if (Object.keys(params).length) {
-      var url = 'http://dev.api-0-x.map-of-life.appspot.com/0.x/inventory/maps?';
+      var url = 'http://api.mol.org/0.x/inventory/maps?';
       Object.keys(params).forEach(function(key) {
         url += key + '=' + params[key].join(',') + '&';
       });
@@ -60,18 +69,5 @@ module.controller('inventoryCtrl',
       $scope.map.layers.overlays = {};
     }
   };
-
-  $scope.windowResize = function(size) {
-    leafletData.getMap().then(function(map) {
-      $timeout(function() {
-        var selector = '.mol-inventory-map .leaflet-container',
-            footer   = angular.element('footer').height(),
-            top      = angular.element(selector).offset().top,
-            height   = size.h - top - footer;
-        angular.element(selector).css('height', height + 'px');
-        map.invalidateSize();
-      }, 300);
-  });};
-
   $scope.initialize();
 }]);

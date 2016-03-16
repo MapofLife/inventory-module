@@ -35,7 +35,7 @@ handlers:
 
 # MOL REST APIs
 
-- url: /inventory/assets/
+- url: /inventory/static/
   static_dir: client
 
 

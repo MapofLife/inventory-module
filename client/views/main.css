@@ -1,0 +1,21 @@
+body {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.main {
+  display: -webkit-flex;
+  display: flex;
+  flex: 1;
+  -webkit-flex: 1;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+}
+
+footer {
+  display: block;
+  position: relative;
+}
