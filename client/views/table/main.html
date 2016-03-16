@@ -1,0 +1,27 @@
+<div class="views-inventory-table">
+  <div class="sidebar-scroll-container">
+    <mol-facets class="sidebar" facets="facets" choices="choices"/>
+  </div>
+  <div class="table-scroll-container">
+    <table class="table table-responsive">
+      <thead><tr>
+        <th ng-repeat="field in facets.fields" ng-bind-html="field.title"></th>
+
+      </tr></thead>
+      <tbody>
+        <tr ng-repeat="row in facets.rows">
+          <td ng-repeat="cell in row">
+            <div ng-repeat="content in cell" ng-bind-html="content.title"></div>
+          </td>
+          <td>
+            <i class="clickable fa fa-info"></i>
+          <td>
+          <td>
+            <i class="clickable fa fa-download"></i>
+          <td>
+        </tr>
+      </tbody>
+    <table>
+  </div>
+  <mol-loading-indicator style="position:absolute; top:128px; left:48%"></mol-loading-indicator>
+</div>

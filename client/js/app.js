@@ -46,7 +46,17 @@ angular.module('mol.inventory', [
         views: {
           "" : { templateUrl: "static/views/map/main.html"}
         },
-        url: '/map',
+        url: '/map'
+      }
+    )
+    .state(
+      'inventory.table',
+      {
+        title: "Dataset Inventory Table",
+        views: {
+          "" : { templateUrl: "static/views/table/main.html"}
+        },
+        url: '/table'
       }
     );
       $locationProvider.html5Mode(true);
