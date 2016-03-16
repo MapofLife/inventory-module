@@ -20,7 +20,8 @@
     "bootstrap": "~3.3.6",
     "jquery": "~2.2.1",
     "ui-leaflet": "~1.0.0",
-    "angular-filter": "~0.5.8"
+    "angular-filter": "~0.5.8",
+    "angular-animate": "~1.5.1"
   },
   "authors": [
     "Jeremy Malczyk <jmalczyk@gmail.com>"
@@ -33,7 +34,7 @@
     "tests"
   ],
   "resolutions": {
-    "angular": "~1.5.0",
+    "angular": "1.5.1",
     "angular-simple-logger": "~0.1.4"
   }
 }

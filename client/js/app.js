@@ -7,10 +7,18 @@ angular.module('mol.inventory', [
   'angular.filter',
   'ngResource',
   'ngSanitize',
+  'ngAnimate',
   'ui.bootstrap',
   'mol.facets',
+  'mol.loading-indicator',
   'mol.inventory-controllers'
 ])
+.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeBar = false;
+    //cfpLoadingBarProvider.includeBar = false;
+    cfpLoadingBarProvider.latencyThreshold = 500;
+  }])
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
   $httpProvider.defaults.withCredentials = true;
