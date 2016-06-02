@@ -9,7 +9,6 @@ angular.module('mol.inventory', [
   'ngSanitize',
   'ngAnimate',
   'ui.bootstrap',
-  'mol.facets',
   'mol.loading-indicator',
   'mol.inventory-controllers'
 ])
@@ -29,14 +28,24 @@ angular.module('mol.inventory', [
     'http*://*mol.org/**',
     'http*://api.mol.org/0.x/inventory/**',
   ]);
-  $urlRouterProvider.otherwise("inventory/");
+  //$urlRouterProvider.otherwise("/");
   $stateProvider
     .state(
       'inventory',
       {
          abstract: true,
-         templateUrl: 'static/views/main.html',
+         templateUrl: 'static/views/layout.html',
          controller: 'inventoryCtrl',
+      }
+    )
+    .state(
+      'inventory.main',
+      {
+        title: "Dataset Inventory Map",
+        views: {
+          "" : {templateUrl: "static/views/main.html"}
+        },
+        url: '/'
       }
     )
     .state(
@@ -44,7 +53,7 @@ angular.module('mol.inventory', [
       {
         title: "Dataset Inventory Map",
         views: {
-          "" : { templateUrl: "static/views/map/main.html"}
+          "" : {templateUrl: "static/views/map/main.html"}
         },
         url: '/map'
       }
@@ -54,7 +63,7 @@ angular.module('mol.inventory', [
       {
         title: "Dataset Inventory Table",
         views: {
-          "" : { templateUrl: "static/views/table/main.html"}
+          "" : {templateUrl: "static/views/table/main.html"}
         },
         url: '/table'
       }

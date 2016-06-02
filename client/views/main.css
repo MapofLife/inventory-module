@@ -15,6 +15,34 @@ body {
 
 }
 
+.sidebar-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.sidebar {
+    position: relative;
+    max-width: 320px;
+    min-width: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 2pt solid gray;
+}
+
+
+.content-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.mol-facets-group-title {
+  padding-right: 10px;
+}
+
 footer {
   display: block;
   position: relative;

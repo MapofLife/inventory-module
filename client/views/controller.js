@@ -69,5 +69,52 @@ module.controller('inventoryCtrl',
       $scope.map.layers.overlays = {};
     }
   };
+
+  $scope.clearFacet = function(facet) {
+    delete $scope.choices[facet];
+  }
+
+  $scope.getColumn = function(col) {
+    return function(row) {
+      try {return row[col]} catch(e){};
+    }
+  }
+
+  /*
+   * Checks a dataset in the table to see if it passes all
+   * select selected facet filters
+   */
+  $scope.applyFilters = function(choices, col, fields) {
+    return function(dataset) {
+        var pass=0,i=0,c=0;
+        //If filters have been made...
+        if(Object.keys(choices).reduce(function(prev,cur){return +(Object.keys(choices[cur]).reduce(function(p,c){return +((choices[cur][c]===true)?1:0)+p;},0))+prev},0)) {
+          //Go through each facet type to see if the dataset passes the filter
+          for(i=0;i<dataset.length;i++) {
+            for(c=0;c<dataset[i].length;c++) {
+              if(col==i) {
+                pass |= (1 << (i));
+                break;
+              } else {
+                if(choices[fields[i].value]) {
+                  if(choices[fields[i].value][dataset[i][c].value]===true) {
+                     pass |= (1 << (i)); //toggle that bit on
+                     break;
+                  }
+                } else {
+                  pass |= (1 << (i));
+                  break;
+                }
+             }
+            }
+          }
+        } else {
+          pass = parseInt('1'.repeat(dataset.length),2);
+        }
+        return (parseInt('1'.repeat(dataset.length),2)===pass);
+    }
+  }
+
+
   $scope.initialize();
 }]);

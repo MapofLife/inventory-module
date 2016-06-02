@@ -21,7 +21,10 @@
     "jquery": "~2.2.1",
     "ui-leaflet": "~1.0.0",
     "angular-filter": "~0.5.8",
-    "angular-animate": "~1.5.1"
+    "angular-animate": "~1.5.1",
+    "angular-odometer": "~0.0.10",
+    "odometer": "~0.4.7",
+    "angular-count-to": "*"
   },
   "authors": [
     "Jeremy Malczyk <jmalczyk@gmail.com>"

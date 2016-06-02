@@ -6,7 +6,7 @@ threadsafe: true
 api_version: 1
 skip_files:
 - ^(node_modules/.*)
-- ^(client/components/mol/?.*/node_modules/.*)
+- ^(client/components/?.*/node_modules/.*)
 - ^(.*/)?#.*#$
 - ^(.*/)?.*~$
 - ^(.*/)?.*\.md$
